@@ -3,7 +3,8 @@ public class Resume {
     // Unique identifier
     String uuid;
 
-    public Resume() {};
+    public Resume() {
+    }
 
 
     @Override
