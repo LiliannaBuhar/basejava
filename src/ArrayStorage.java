@@ -24,14 +24,12 @@ public class ArrayStorage {
     }
 
     Resume get(String uuid) {
-        Resume resume = null;
         for (int i = 0; i < length; i++) {
             if (storage[i].uuid == uuid) {
-                resume = storage[i];
-                break;
+                return storage[i];
             }
         }
-        return resume;
+        return null;
     }
 
 
