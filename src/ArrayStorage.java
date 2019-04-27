@@ -1,6 +1,6 @@
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
-    int length = size();
+    int length = 0;
 
     void clear() {
         for (int i = 0; i < length; i++) {
@@ -17,9 +17,9 @@ public class ArrayStorage {
                 break;
             }
         }
-        if (isExists == false) {
+        if (isExists) {
             storage[length] = r;
-            length = length + 1;
+            length++;
         }
     }
 
@@ -38,7 +38,7 @@ public class ArrayStorage {
             if (storage[i].uuid == uuid) {
                 storage[i] = storage[length - 1];
                 storage[length - 1] = null;
-                length = length - 1;
+                length--;
                 break;
             }
         }
