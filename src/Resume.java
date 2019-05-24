@@ -11,4 +11,7 @@ public class Resume {
     public String toString() {
         return uuid;
     }
+    public String getUuid() {
+        return uuid;
+    }
 }
