@@ -1,6 +1,16 @@
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
+    Resume[] storage = new Resume[2];
     int length = 0;
+
+    void update(Resume resume) {
+
+        for (int i = 0; i < length; i++) {
+            if (storage[i].uuid == resume.uuid) {
+                storage[i] = resume;
+            }
+        }
+
+    }
 
     void clear() {
         for (int i = 0; i < length; i++) {
@@ -14,12 +24,18 @@ public class ArrayStorage {
         for (int i = 0; i < length; i++) {
             if (storage[i].uuid == r.uuid) {
                 isExists = true;
+                System.out.println("Error save: resume is already existed in storage");
                 break;
             }
         }
-        if (isExists) {
-            storage[length] = r;
-            length++;
+        if (!isExists) {
+            if (length >= storage.length) {
+                System.out.println("Error save: error length of the array");
+            } else {
+                storage[length] = r;
+                length++;
+                System.out.println("Info save: resume is added in storage");
+            }
         }
     }
 
@@ -56,12 +72,6 @@ public class ArrayStorage {
     }
 
     int size() {
-        int counter = 0;
-        for (int i = 0; i < storage.length; i++) {
-            if (storage[i] != null) {
-                counter = i + 1;
-            }
-        }
-        return counter;
+        return length;
     }
 }
