@@ -1,5 +1,7 @@
+import java.util.Arrays;
+
 public class ArrayStorage {
-    Resume[] storage = new Resume[2];
+    Resume[] storage = new Resume[10000];
     int length = 0;
 
     void update(Resume resume) {
@@ -13,9 +15,7 @@ public class ArrayStorage {
     }
 
     void clear() {
-        for (int i = 0; i < length; i++) {
-            storage[i] = null;
-        }
+        Arrays.fill(storage, 0, length - 1, null);
         length = 0;
     }
 
@@ -65,9 +65,7 @@ public class ArrayStorage {
      */
     Resume[] getAll() {
         Resume[] smallStorage = new Resume[length];
-        for (int i = 0; i < length; i++) {
-            smallStorage[i] = storage[i];
-        }
+        smallStorage = Arrays.copyOfRange(storage, 0, length);
         return smallStorage;
     }
 
