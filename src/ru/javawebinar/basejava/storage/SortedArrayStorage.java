@@ -6,51 +6,20 @@ import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage{
 
+    protected void fillDeletedElement(int index) {
+        int numMoved = size - index - 1;
+        if (numMoved > 0) {
+            System.arraycopy(storage, index + 1, storage, index, numMoved);
+        }
+    }
+
     @Override
-    public void save(Resume r) {
-        if (getIndex(r.getUuid()) > 0) {
-            System.out.println("Resume! " + r.getUuid() + " already exist");
-        } else if (size >= STORAGE_LIMIT) {
-            System.out.println("Storage overflow");
-        } else {
-
-            if (size==0) {
-                storage[size]=r;
-             }
-
-            else {
-             for (int i=0;i<size;i++)
-            {
-                if(storage[i].compareTo(r)>0)   {
-                    for (int j=size;j>i;j--) {
-                        storage[j]=storage[j-1];
-                    }
-                    storage[i]=r;
-                    break;
-              }
-                else if (i==size-1) {
-                    storage[size]=r;
-                }
-            }
-            }
-            size++;
-
-        }
+    protected void insertElement(Resume r, int index) {
+//      http://codereview.stackexchange.com/questions/36221/binary-search-for-inserting-in-array#answer-36239
+        int insertIdx = -index - 1;
+        System.arraycopy(storage, insertIdx, storage, insertIdx + 1, size - insertIdx);
+        storage[insertIdx] = r;
     }
-
-
-    public void delete(String uuid) {
-        int index = getIndex(uuid);
-        if (index <0) {
-            System.out.println("Resume " + uuid + " not exist");
-        } else {
-            for (int i=index;i<size-1;i++)
-            storage[i] = storage[i+1];
-        }
-        storage[size - 1] = null;
-        size--;
-    }
-
 
     @Override
     protected int getIndex(String uuid) {
